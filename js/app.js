@@ -8,18 +8,17 @@ function filterProducts(search){
 }
 
 function renderProducts(products){
-  let htmlString = '';
-  for(let product of products){
-    htmlString += `<div class="card" style="width: 17rem;">
-    <img class="card-img-top" src="${product.image}">
-    <div class="card-body">
-      <h5 class="card-title">${product.title}</h5>
-      <p class="card-text">Category: ${product.category}</p>
-      <p class="card-text text-danger">${product.price}</p>
-    </div>
-  </div>`;
-  }
-  document.querySelector('#products').innerHTML = htmlString
+const getProducts = products.reduce(function(acc, product){
+  return acc +=  `<div class="card" style="width: 17rem;">
+     <img class="card-img-top" src="${product.image}">
+     <div class="card-body">
+       <h5 class="card-title">${product.title}</h5>
+       <p class="card-text">Category: ${product.category}</p>
+       <p class="card-text text-danger">${product.price}</p>
+     </div>
+    </div>`;
+},'')
+document.querySelector('#products').innerHTML = getProducts;
 }
 
 fetch('https://fakestoreapi.com/products')
